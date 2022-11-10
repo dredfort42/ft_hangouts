@@ -19,6 +19,7 @@ extension ContactData {
     @NSManaged public var name: String?
     @NSManaged public var phoneNumber: Int64
     @NSManaged public var image: Data?
+	@NSManaged public var contactID: UUID
 
 }
 
