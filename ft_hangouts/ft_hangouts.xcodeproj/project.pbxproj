@@ -17,6 +17,7 @@
 		AF43BA02291A711700D9871A /* Contacts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF43BA00291A711700D9871A /* Contacts.xcdatamodeld */; };
 		AF43BA05291A716900D9871A /* ContactData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF43BA03291A716900D9871A /* ContactData+CoreDataClass.swift */; };
 		AF43BA06291A716900D9871A /* ContactData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF43BA04291A716900D9871A /* ContactData+CoreDataProperties.swift */; };
+		AF48C38A291D2792003B45EA /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C389291D2792003B45EA /* SummaryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		AF43BA01291A711700D9871A /* Contacts.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Contacts.xcdatamodel; sourceTree = "<group>"; };
 		AF43BA03291A716900D9871A /* ContactData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AF43BA04291A716900D9871A /* ContactData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AF48C389291D2792003B45EA /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 			children = (
 				AF43B9E3291901EB00D9871A /* Info.plist */,
 				AF43B9D8291901E800D9871A /* Main.storyboard */,
+				AF48C389291D2792003B45EA /* SummaryViewController.swift */,
 				AF16C8BC291AA9E600B65A86 /* ContactsTableViewController.swift */,
 				AF16C8BE291C01A800B65A86 /* ContactEditViewController.swift */,
 				AF16C8BB291A91AB00B65A86 /* Data */,
@@ -169,6 +172,7 @@
 				AF43BA06291A716900D9871A /* ContactData+CoreDataProperties.swift in Sources */,
 				AF43BA02291A711700D9871A /* Contacts.xcdatamodeld in Sources */,
 				AF16C8BD291AA9E600B65A86 /* ContactsTableViewController.swift in Sources */,
+				AF48C38A291D2792003B45EA /* SummaryViewController.swift in Sources */,
 				AF16C8BF291C01A900B65A86 /* ContactEditViewController.swift in Sources */,
 				AF43BA05291A716900D9871A /* ContactData+CoreDataClass.swift in Sources */,
 				AF43B9D3291901E800D9871A /* AppDelegate.swift in Sources */,
