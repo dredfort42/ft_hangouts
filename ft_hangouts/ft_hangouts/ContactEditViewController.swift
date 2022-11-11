@@ -14,7 +14,7 @@ class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImageP
 	var contact: ContactData?
 
 	@IBAction func cancelBarButtonAction(_ sender: UIBarButtonItem) {
-		performSegue(withIdentifier: "toContacts", sender: self)
+		navigationController?.popToRootViewController(animated: true)
 	}
 
 	@IBAction func doneBarButtonAction(_ sender: UIBarButtonItem) {
@@ -45,8 +45,7 @@ class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImageP
 				print(error.localizedDescription)
 			}
 		}
-
-		performSegue(withIdentifier: "toContacts", sender: self)
+		navigationController?.popToRootViewController(animated: true)
 	}
 
 	@IBAction func takePictureButtonAction(_ sender: UIButton) {
@@ -67,6 +66,10 @@ class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImageP
 			imagePickerController.allowsEditing = false
 			self.present(imagePickerController, animated: true, completion: nil)
 		}
+	}
+
+	@IBAction func erasePictureButtonAction(_ sender: UIButton) {
+		imageView.image = UIImage(named: "Invader")
 	}
 
 	@IBOutlet var spacerLabelView: [UILabel]!

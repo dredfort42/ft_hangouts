@@ -30,7 +30,7 @@ class SummaryViewController: UIViewController {
 		} catch let error as NSError {
 			print(error.localizedDescription)
 		}
-		performSegue(withIdentifier: "toContacts", sender: self)
+		navigationController?.popToRootViewController(animated: true)
 	}
 
 	override func viewDidLoad() {

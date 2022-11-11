@@ -11,19 +11,25 @@ import CoreData
 class ContactsTableViewController: UITableViewController {
 
 	var contacts: [ContactData] = []
+	var groups: [String] = []
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-		guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-		let managedContext = appDelegate.persistentContainer.viewContext
-		let fetchRequest = ContactData.fetchRequest()
+		contacts.removeAll()
+		contacts = getContacts()
 
-		do {
-			contacts = try (managedContext.fetch(fetchRequest))
-		} catch let error as NSError {
-			print(error.localizedDescription)
+		groups.removeAll()
+		for contact in contacts {
+			if !groups.contains(contact.name?.first?.uppercased() ?? "ERROR") {
+				print(contact.name?.first?.uppercased() ?? "ERROR")
+				groups.append(contact.name?.first?.uppercased() ?? "ERROR")
+			}
 		}
+		groups.sort(by: {$0 < $1})
+		print(groups)
+
+		tableView.reloadData()
 	}
 
 	override func viewDidLoad() {
@@ -40,74 +46,79 @@ class ContactsTableViewController: UITableViewController {
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		// #warning Incomplete implementation, return the number of sections
-		return 1
+		return groups.count
+	}
+
+	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return groups[section]
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		// #warning Incomplete implementation, return the number of rows
-		return contacts.count
+		var rows = 0
+		let sectionLetter = groups[section]
+
+		for contact in contacts {
+			if (contact.name?.first?.uppercased() ?? "ERROR") == sectionLetter {
+				rows += 1
+			}
+		}
+
+		return rows
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
 
-		cell.textLabel?.text = contacts[indexPath.row].name
+		var rowNum = 0
+		for contact in contacts {
+			if groups[indexPath.section] != (contact.name?.first?.uppercased() ?? "ERROR") {
+				rowNum += 1
+			} else {
+				break
+			}
+		}
+
+		cell.textLabel?.text = contacts[rowNum + indexPath.row].name
 
 		return cell
 	}
 
-	/*
-	 // Override to support conditional editing of the table view.
-	 override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-	 // Return false if you do not want the specified item to be editable.
-	 return true
-	 }
-	 */
-
-	/*
-	 // Override to support editing the table view.
-	 override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-	 if editingStyle == .delete {
-	 // Delete the row from the data source
-	 tableView.deleteRows(at: [indexPath], with: .fade)
-	 } else if editingStyle == .insert {
-	 // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-	 }
-	 }
-	 */
-
-	/*
-	 // Override to support rearranging the table view.
-	 override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-	 }
-	 */
-
-	/*
-	 // Override to support conditional rearranging of the table view.
-	 override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-	 // Return false if you do not want the item to be re-orderable.
-	 return true
-	 }
-	 */
-
-	/*
-	 // MARK: - Navigation
-
-	 // In a storyboard-based application, you will often want to do a little preparation before navigation
-	 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	 // Get the new view controller using segue.destination.
-	 // Pass the selected object to the new view controller.
-	 }
-	 */
+	override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+		return groups
+	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "clickOnContact" {
 			if let indexPath = tableView.indexPathForSelectedRow {
 				let destinationView = segue.destination as! SummaryViewController
-				destinationView.contact = contacts[indexPath.row]
+
+				var rowNum = 0
+				for contact in contacts {
+					if groups[indexPath.section] != (contact.name?.first?.uppercased() ?? "ERROR") {
+						rowNum += 1
+					} else {
+						break
+					}
+				}
+				destinationView.contact = contacts[rowNum + indexPath.row]
 			}
 		}
+	}
+
+	func getContacts() -> [ContactData] {
+		var tmpContats: [ContactData] = []
+		guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return tmpContats }
+		let managedContext = appDelegate.persistentContainer.viewContext
+		let fetchRequest = ContactData.fetchRequest()
+
+		do {
+			tmpContats = try (managedContext.fetch(fetchRequest))
+		} catch let error as NSError {
+			print(error.localizedDescription)
+		}
+		tmpContats.sort(by: { $0.name ?? "" < $1.name ?? "" })
+		return tmpContats
 	}
 
 }
