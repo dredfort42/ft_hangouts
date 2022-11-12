@@ -18,6 +18,7 @@
 		AF43BA05291A716900D9871A /* ContactData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF43BA03291A716900D9871A /* ContactData+CoreDataClass.swift */; };
 		AF43BA06291A716900D9871A /* ContactData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF43BA04291A716900D9871A /* ContactData+CoreDataProperties.swift */; };
 		AF48C38A291D2792003B45EA /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF48C389291D2792003B45EA /* SummaryViewController.swift */; };
+		AF8151E629201CDD00614A79 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8151E529201CDD00614A79 /* MoreViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		AF43BA03291A716900D9871A /* ContactData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AF43BA04291A716900D9871A /* ContactData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AF48C389291D2792003B45EA /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
+		AF8151E529201CDD00614A79 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 			children = (
 				AF43B9E3291901EB00D9871A /* Info.plist */,
 				AF43B9D8291901E800D9871A /* Main.storyboard */,
+				AF8151E529201CDD00614A79 /* MoreViewController.swift */,
 				AF48C389291D2792003B45EA /* SummaryViewController.swift */,
 				AF16C8BC291AA9E600B65A86 /* ContactsTableViewController.swift */,
 				AF16C8BE291C01A800B65A86 /* ContactEditViewController.swift */,
@@ -169,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF8151E629201CDD00614A79 /* MoreViewController.swift in Sources */,
 				AF43BA06291A716900D9871A /* ContactData+CoreDataProperties.swift in Sources */,
 				AF43BA02291A711700D9871A /* Contacts.xcdatamodeld in Sources */,
 				AF16C8BD291AA9E600B65A86 /* ContactsTableViewController.swift in Sources */,

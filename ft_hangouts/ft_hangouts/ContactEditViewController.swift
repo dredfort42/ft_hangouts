@@ -7,11 +7,13 @@
 
 import UIKit
 import CoreData
+import ContactsUI
 
-class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CNContactViewControllerDelegate {
 
 	var contactID: UUID?
 	var contact: ContactData?
+	let store = CNContactStore()
 
 	@IBAction func cancelBarButtonAction(_ sender: UIBarButtonItem) {
 		navigationController?.popToRootViewController(animated: true)
@@ -30,13 +32,22 @@ class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImageP
 				} else if phoneNumberFieldView.hasText {
 					newContact.name = phoneNumberFieldView.text
 				}
-				newContact.phoneNumber = Int64(phoneNumberFieldView.text!) ?? 0
+				if phoneNumberFieldView.text?.first == "+" {
+					newContact.phoneNumber = phoneNumberFieldView.text ?? ""
+				} else {
+					newContact.phoneNumber = "+\(phoneNumberFieldView.text ?? "")"
+				}
 				newContact.image = (imageView.image?.jpegData(compressionQuality: 1.0))! as Data
-				newContact.contactID = UUID()
+				newContact.contactID = createContact()
 			} else {
 				contact!.name = contactNameFieldView.text
-				contact!.phoneNumber = Int64(phoneNumberFieldView.text!) ?? 0
+				if phoneNumberFieldView.text?.first == "+" {
+					contact!.phoneNumber = phoneNumberFieldView.text ?? ""
+				} else {
+					contact!.phoneNumber = "+\(phoneNumberFieldView.text ?? "")"
+				}
 				contact!.image = (imageView.image?.jpegData(compressionQuality: 1.0))! as Data
+				updateContact(name: contactNameFieldView.text!)
 			}
 
 			do {
@@ -46,6 +57,62 @@ class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImageP
 			}
 		}
 		navigationController?.popToRootViewController(animated: true)
+	}
+
+	func createContact() -> UUID {
+
+		let mutableContact = CNMutableContact()
+		mutableContact.imageData = (imageView.image?.jpegData(compressionQuality: 1.0))! as Data
+		mutableContact.givenName = contactNameFieldView.text ?? ""
+		if phoneNumberFieldView.text?.first == "+" {
+			mutableContact.phoneNumbers.append(CNLabeledValue(
+				label: CNLabelPhoneNumberMobile, value: CNPhoneNumber(stringValue: (phoneNumberFieldView.text ?? ""))))
+		} else {
+			mutableContact.phoneNumbers.append(CNLabeledValue(
+				label: CNLabelPhoneNumberMobile, value: CNPhoneNumber(stringValue: ("+" + (phoneNumberFieldView.text ?? "")))))
+		}
+
+		let saveRequest = CNSaveRequest()
+		saveRequest.add(mutableContact, toContainerWithIdentifier: nil)
+		do {
+			try store.execute(saveRequest)
+		} catch let error as NSError {
+			print(error.localizedDescription)
+		}
+		return mutableContact.id
+	}
+
+	func updateContact(name: String) {
+		do {
+			let predicate = CNContact.predicateForContacts(matchingName: name)
+			let cnContacts = try store.unifiedContacts(matching: predicate, keysToFetch: [
+				CNContactImageDataKey as CNKeyDescriptor,
+				CNContactGivenNameKey as CNKeyDescriptor,
+				CNContactPhoneNumbersKey as CNKeyDescriptor,
+			])
+			guard let cnContact = cnContacts.first else {
+				print("Contact not found")
+				return
+			}
+			print(cnContact)
+			guard let mutableContact = cnContact.mutableCopy() as? CNMutableContact else { return }
+			mutableContact.imageData = (imageView.image?.jpegData(compressionQuality: 1.0))! as Data
+			mutableContact.givenName = contactNameFieldView.text ?? ""
+			if phoneNumberFieldView.text?.first == "+" {
+				mutableContact.phoneNumbers.append(CNLabeledValue(
+					label: CNLabelPhoneNumberMobile, value: CNPhoneNumber(stringValue: (phoneNumberFieldView.text ?? ""))))
+			} else {
+				mutableContact.phoneNumbers.append(CNLabeledValue(
+					label: CNLabelPhoneNumberMobile, value: CNPhoneNumber(stringValue: ("+" + (phoneNumberFieldView.text ?? "")))))
+			}
+
+			let saveRequest = CNSaveRequest()
+			saveRequest.update(mutableContact)
+			try store.execute(saveRequest)
+
+		} catch let error as NSError {
+			print(error.localizedDescription)
+		}
 	}
 
 	@IBAction func takePictureButtonAction(_ sender: UIButton) {
@@ -110,7 +177,7 @@ class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImageP
 					imageView.image = UIImage(data: (contact!.image)! as Data )
 				}
 				contactNameFieldView.text = contact?.name
-				phoneNumberFieldView.text = String(contact!.phoneNumber)
+				phoneNumberFieldView.text = contact?.phoneNumber
 			} catch let error as NSError {
 				print(error.localizedDescription)
 			}
