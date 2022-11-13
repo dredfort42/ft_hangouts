@@ -145,6 +145,16 @@ class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImageP
 	@IBOutlet weak var contactNameFieldView: UITextField!
 	@IBOutlet weak var phoneNumberFieldView: UITextField!
 
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+
+		let defaults = UserDefaults.standard
+		let rgba: [CGFloat] = defaults.object(forKey: "headerColorRGBA") as? [CGFloat] ?? [0, 0, 0, 0]
+		let color = UIColor(red: rgba[0], green: rgba[1], blue: rgba[2], alpha: rgba[3])
+
+		navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
+	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
@@ -200,5 +210,4 @@ class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImageP
 		}
 		super.touchesBegan(touches, with: event)
 	}
-
 }

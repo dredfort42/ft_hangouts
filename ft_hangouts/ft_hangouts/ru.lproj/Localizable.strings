@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  ft_hangouts
+
+  Created by Dmitry Novikov on 13.11.2022.
+  
+*/
+
+IN_BACKGROUND="В фоновом режиме с:";
+OK_BUTTON="Продолжить";

@@ -9,21 +9,35 @@ import UIKit
 
 class MoreViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	let defaults = UserDefaults.standard
 
-        // Do any additional setup after loading the view.
-    }
-    
+	@IBOutlet weak var selectColorView: UIColorWell!
+	@IBOutlet weak var exampleView: UITextView!
 
-    /*
-    // MARK: - Navigation
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+		let rgba: [CGFloat] = defaults.object(forKey: "headerColorRGBA") as? [CGFloat] ?? [0, 0, 0, 1]
+		let color = UIColor(red: rgba[0], green: rgba[1], blue: rgba[2], alpha: rgba[3])
+
+		navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: color]
+		selectColorView.selectedColor = color
+		exampleView.textColor = color
+	}
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+
+		// Do any additional setup after loading the view.
+		selectColorView.addTarget(self, action: #selector(colorChanged(_:)), for: .valueChanged)
+	}
+
+	@objc func colorChanged(_ sender: Any) {
+		exampleView.textColor = selectColorView.selectedColor
+
+		let headerColor: CIColor = CIColor(color: selectColorView.selectedColor ?? .black)
+		let rgba: [CGFloat] = [headerColor.red, headerColor.green, headerColor.blue, headerColor.alpha]
+		defaults.set(rgba, forKey: "headerColorRGBA")
+	}
 
 }

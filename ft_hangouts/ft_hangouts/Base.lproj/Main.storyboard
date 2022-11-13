@@ -92,14 +92,18 @@
                                             </colorWell>
                                         </subviews>
                                     </stackView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="ExampleExampleExampleExampleExampleExampleExampleExampleExampleExampleExampleExampleExample" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yNT-EB-SzQ">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNT-EB-SzQ">
                                         <rect key="frame" x="0.0" y="61.666666666666657" width="361" height="300"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="300" id="qFH-Rj-AY3"/>
                                         </constraints>
+                                        <string key="text">current
+header
+color
+example</string>
                                         <color key="textColor" systemColor="labelColor"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
@@ -114,6 +118,10 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="more" id="Q3R-6T-HQ4"/>
+                    <connections>
+                        <outlet property="exampleView" destination="yNT-EB-SzQ" id="oEB-qP-90e"/>
+                        <outlet property="selectColorView" destination="lz8-T3-QTF" id="caD-f8-YKs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uw9-cc-4PS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -456,7 +464,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="OJN-dG-bhE"/>
+        <segue reference="srV-jO-XQW"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Invader" width="512" height="512"/>

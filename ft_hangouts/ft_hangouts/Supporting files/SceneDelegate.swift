@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?
+	var setBackgroundTime: Date?
 
 
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -34,11 +35,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	func sceneWillResignActive(_ scene: UIScene) {
 		// Called when the scene will move from an active state to an inactive state.
 		// This may occur due to temporary interruptions (ex. an incoming phone call).
+
+		setBackgroundTime = Date()
 	}
 
 	func sceneWillEnterForeground(_ scene: UIScene) {
 		// Called as the scene transitions from the background to the foreground.
 		// Use this method to undo the changes made on entering the background.
+
+		if setBackgroundTime != nil {
+			let dateFormatter = DateFormatter()
+			dateFormatter.dateFormat = "H:mm:ss"
+			DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+				self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+				let alertTitle = NSLocalizedString("IN_BACKGROUND", comment: "In the background from:")
+				let alert = UIAlertController(
+					title: alertTitle,
+					message: dateFormatter.string(from: self.setBackgroundTime!),
+					preferredStyle: .alert)
+				let actionTitle = NSLocalizedString("OK_BUTTON", comment: "OK")
+				let okAction = UIAlertAction(title: actionTitle, style: .default)
+				alert.addAction(okAction)
+				self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+				self.setBackgroundTime = nil
+			}
+		}
 	}
 
 	func sceneDidEnterBackground(_ scene: UIScene) {
@@ -50,6 +71,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		(UIApplication.shared.delegate as? AppDelegate)?.saveContext()
 	}
 
+//	// MARK: - Set Background time
+//
+////	var setBackgroundTime: Date?
+//
+//
+//
+//	func applicationWillResignActive(_ application: UIApplication) {
+////		setBackgroundTime = Date()
+////		print(setBackgroundTime?.description)
+//		print(#function)
+//	}
+//
+//	func applicationDidEnterBackground(_ application: UIApplication) {
+////		setBackgroundTime = Date()
+////		print(setBackgroundTime?.description)
+//		print(#function)
+//	}
+////
+////	func applicationDidBecomeActive(_ application: UIApplication) {
+////		if setBackgroundTime != nil {
+//////			let alert = UIAlertController(
+//////				title: "Returning time", message: setBackgroundTime?.description,         preferredStyle: UIAlertController.Style.alert)
+//////
+//////			alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in	}))
+//////
+//////			alert.present(alert, animated: true, completion: nil)
+////			print(setBackgroundTime?.description)
+////			setBackgroundTime = nil
+////		}
+////	}
 
 }
 

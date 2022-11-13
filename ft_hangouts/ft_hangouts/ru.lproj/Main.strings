@@ -1,0 +1,78 @@
+
+/* Class = "UITextField"; placeholder = "phone number"; ObjectID = "3QG-pF-8OK"; */
+"3QG-pF-8OK.placeholder" = "номер телефона";
+
+/* Class = "UILabel"; text = " Phone number"; ObjectID = "9sX-se-cvj"; */
+"9sX-se-cvj.text" = " Номер телефона";
+
+/* Class = "UIButton"; normalTitle = "Take picture"; ObjectID = "AJ7-UG-ddN"; */
+"AJ7-UG-ddN.normalTitle" = "Take picture";
+
+/* Class = "UILabel"; text = "..."; ObjectID = "Fsm-aQ-PdJ"; */
+"Fsm-aQ-PdJ.text" = "...";
+
+/* Class = "UIButton"; configuration.title = "Send message"; ObjectID = "HKr-dT-Dtg"; */
+"HKr-dT-Dtg.configuration.title" = "Отправить сообщение";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "HKr-dT-Dtg"; */
+"HKr-dT-Dtg.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "..."; ObjectID = "LoJ-o0-C1V"; */
+"LoJ-o0-C1V.text" = "...";
+
+/* Class = "UILabel"; text = "..."; ObjectID = "O9p-Hy-NPh"; */
+"O9p-Hy-NPh.text" = "...";
+
+/* Class = "UILabel"; text = " Contact name"; ObjectID = "SGR-tt-v6R"; */
+"SGR-tt-v6R.text" = " Контактное лицо";
+
+/* Class = "UINavigationItem"; title = "Edit contact"; ObjectID = "Vtg-qT-jtV"; */
+"Vtg-qT-jtV.title" = "Редактировать контакт";
+
+/* Class = "UILabel"; text = "Select header color:"; ObjectID = "WUu-aH-kcC"; */
+"WUu-aH-kcC.text" = "Цвет заголовков:";
+
+/* Class = "UILabel"; text = "..."; ObjectID = "bqW-2K-z3l"; */
+"bqW-2K-z3l.text" = "...";
+
+/* Class = "UIButton"; configuration.title = "Call"; ObjectID = "dZ1-6f-C2L"; */
+"dZ1-6f-C2L.configuration.title" = "Позвонить";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "dZ1-6f-C2L"; */
+"dZ1-6f-C2L.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "Contact summary"; ObjectID = "gWe-9o-4mZ"; */
+"gWe-9o-4mZ.title" = "О контакте";
+
+/* Class = "UILabel"; text = "Contact name"; ObjectID = "kMC-VN-Pp2"; */
+"kMC-VN-Pp2.text" = "Контактное лицо";
+
+/* Class = "UIButton"; configuration.title = "Delete contact"; ObjectID = "lEt-2B-UwE"; */
+"lEt-2B-UwE.configuration.title" = "Удалить контакт";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "lEt-2B-UwE"; */
+"lEt-2B-UwE.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "Contacts"; ObjectID = "om8-sC-Ow7"; */
+"om8-sC-Ow7.title" = "Контакты";
+
+/* Class = "UILabel"; text = " Phone number"; ObjectID = "qPf-NB-Jr6"; */
+"qPf-NB-Jr6.text" = " Номер телефона";
+
+/* Class = "UILabel"; text = "..."; ObjectID = "r3v-9f-2D3"; */
+"r3v-9f-2D3.text" = "...";
+
+/* Class = "UILabel"; text = "..."; ObjectID = "sib-E0-eDE"; */
+"sib-E0-eDE.text" = "...";
+
+/* Class = "UITextField"; placeholder = "contact name"; ObjectID = "swY-SC-gus"; */
+"swY-SC-gus.placeholder" = "контактное лицо";
+
+/* Class = "UIButton"; normalTitle = "Choose picture"; ObjectID = "tGj-ji-6Hl"; */
+"tGj-ji-6Hl.normalTitle" = "Choose picture";
+
+/* Class = "UILabel"; text = "Phone number"; ObjectID = "umD-0N-NFz"; */
+"umD-0N-NFz.text" = "Номер телефона";
+
+/* Class = "UITextView"; text = "current\nheader\ncolor\nexample"; ObjectID = "yNT-EB-SzQ"; */
+"yNT-EB-SzQ.text" = "Пример\nустановленного\nцвета\nзаголовков";

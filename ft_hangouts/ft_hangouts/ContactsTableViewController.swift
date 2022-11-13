@@ -10,6 +10,7 @@ import CoreData
 
 class ContactsTableViewController: UITableViewController {
 
+	let defaults = UserDefaults.standard
 	var contacts: [ContactData] = []
 	var groups: [String] = []
 
@@ -30,18 +31,20 @@ class ContactsTableViewController: UITableViewController {
 		print(groups)
 
 		tableView.reloadData()
+
+		let rgba: [CGFloat] = defaults.object(forKey: "headerColorRGBA") as? [CGFloat] ?? [0, 0, 0, 0]
+
+		navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor(red: rgba[0], green: rgba[1], blue: rgba[2], alpha: rgba[3])]
+
+//		if SceneDelegate.setBackgroundTime != nil {
+//
+//			present(alert, animated: true)
+//			SceneDelegate.setBackgroundTime = nil
+//		}
 	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
-		// Uncomment the following line to preserve selection between presentations
-		// self.clearsSelectionOnViewWillAppear = false
-
-		// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-		// self.navigationItem.rightBarButtonItem = self.editButtonItem
-
-//		navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.red]
 	}
 
 	// MARK: - Table view data source
