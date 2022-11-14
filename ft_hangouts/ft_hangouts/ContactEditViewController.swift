@@ -99,11 +99,11 @@ class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImageP
 			mutableContact.imageData = (imageView.image?.jpegData(compressionQuality: 1.0))! as Data
 			mutableContact.givenName = contactNameFieldView.text ?? ""
 			if phoneNumberFieldView.text?.first == "+" {
-				mutableContact.phoneNumbers.append(CNLabeledValue(
-					label: CNLabelPhoneNumberMobile, value: CNPhoneNumber(stringValue: (phoneNumberFieldView.text ?? ""))))
+				mutableContact.phoneNumbers[0] = CNLabeledValue(
+					label: CNLabelPhoneNumberMobile, value: CNPhoneNumber(stringValue: (phoneNumberFieldView.text ?? "")))
 			} else {
-				mutableContact.phoneNumbers.append(CNLabeledValue(
-					label: CNLabelPhoneNumberMobile, value: CNPhoneNumber(stringValue: ("+" + (phoneNumberFieldView.text ?? "")))))
+				mutableContact.phoneNumbers[0] = CNLabeledValue(
+					label: CNLabelPhoneNumberMobile, value: CNPhoneNumber(stringValue: ("+" + (phoneNumberFieldView.text ?? ""))))
 			}
 
 			let saveRequest = CNSaveRequest()

@@ -7,11 +7,12 @@
 
 import UIKit
 import MessageUI
+import ContactsUI
 
-class SummaryViewController: UIViewController, MFMessageComposeViewControllerDelegate {
+class SummaryViewController: UIViewController, MFMessageComposeViewControllerDelegate, CNContactViewControllerDelegate {
 
 	var contact: ContactData?
-
+	let store = CNContactStore()
 
 	@IBOutlet var spacerLabelView: [UILabel]!
 	@IBOutlet weak var imageView: UIImageView!
@@ -68,6 +69,27 @@ class SummaryViewController: UIViewController, MFMessageComposeViewControllerDel
 		} catch let error as NSError {
 			print(error.localizedDescription)
 		}
+
+		do {
+			let predicate = CNContact.predicateForContacts(matchingName: contactLabelView.text ?? "")
+			let cnContacts = try store.unifiedContacts(matching: predicate, keysToFetch: [
+				CNContactImageDataKey as CNKeyDescriptor,
+				CNContactGivenNameKey as CNKeyDescriptor,
+				CNContactPhoneNumbersKey as CNKeyDescriptor,
+			])
+			guard let cnContact = cnContacts.first else {
+				print("Contact not found")
+				return
+			}
+			guard let mutableContact = cnContact.mutableCopy() as? CNMutableContact else { return }
+			let saveRequest = CNSaveRequest()
+			saveRequest.delete(mutableContact)
+			try store.execute(saveRequest)
+
+		} catch let error as NSError {
+			print(error.localizedDescription)
+		}
+
 		navigationController?.popToRootViewController(animated: true)
 	}
 
