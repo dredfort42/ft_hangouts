@@ -14,6 +14,7 @@ class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImageP
 	var contactID: UUID?
 	var contact: ContactData?
 	let store = CNContactStore()
+	var contactName: String = ""
 
 	@IBAction func cancelBarButtonAction(_ sender: UIBarButtonItem) {
 		navigationController?.popToRootViewController(animated: true)
@@ -47,7 +48,8 @@ class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImageP
 					contact!.phoneNumber = "+\(phoneNumberFieldView.text ?? "")"
 				}
 				contact!.image = (imageView.image?.jpegData(compressionQuality: 1.0))! as Data
-				updateContact(name: contactNameFieldView.text!)
+				updateContact(name: contactName)
+				contactName = ""
 			}
 
 			do {
@@ -187,6 +189,7 @@ class ContactEditViewController: UIViewController, UITextFieldDelegate, UIImageP
 					imageView.image = UIImage(data: (contact!.image)! as Data )
 				}
 				contactNameFieldView.text = contact?.name
+				contactName = contact?.name ?? ""
 				phoneNumberFieldView.text = contact?.phoneNumber
 			} catch let error as NSError {
 				print(error.localizedDescription)
